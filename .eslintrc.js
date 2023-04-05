@@ -12,6 +12,6 @@ export default {
         "sourceType": "module"
     },
     "rules": {
-        'no-console': 'off',
+        'no-console': 'on',
     }
 }
