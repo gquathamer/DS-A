@@ -12,14 +12,42 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "no-console": [
-            "error",
-            {
-                "allow": [
-                "warn",
-                "error"
-                ]
-            }
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "curly": [
+      "error",
+      "multi-line"
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
         ]
-    }
-}
+      }
+    ],
+    "no-restricted-globals": [
+      "error",
+      {
+        "name": "event",
+        "message": "Listener function's event parameter is missing."
+      }
+    ],
+    "padded-blocks": "off",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ]
+  },
+};
