@@ -1,53 +1,49 @@
 /* exported Queue */
 
-class Queue {
+export default class Queue {
+ constructor(...values) {
+  const data = {};
 
-  constructor(...values) {
+  let head = 0;
+  let tail = -1;
 
-    const data = {};
+  this.enqueue = function (value) {
+   if (arguments.length < 1) {
+    throw new TypeError('queue.enqueue() requires a value argument');
+   }
+   if (typeof value === 'undefined') {
+    throw new TypeError('queue.enqueue(value) received undefined');
+   }
+   tail++;
+   data[tail] = value;
+  };
 
-    let head = 0;
-    let tail = -1;
+  this.peek = function () {
+   if (tail < head) return;
+   return data[head];
+  };
 
-    this.enqueue = function (value) {
-      if (arguments.length < 1) {
-        throw new TypeError('queue.enqueue() requires a value argument');
-      }
-      if (typeof value === 'undefined') {
-        throw new TypeError('queue.enqueue(value) received undefined');
-      }
-      tail++;
-      data[tail] = value;
-    };
+  this.dequeue = function () {
+   if (tail < head) return;
+   const value = data[head];
+   delete data[head];
+   head++;
+   return value;
+  };
 
-    this.peek = function () {
-      if (tail < head) return;
-      return data[head];
-    };
+  this.print = function () {
+   if (tail < head) return 'Queue { <empty> }';
+   let output = 'Queue { ';
+   for (let i = head; i < tail; i++) {
+    output += JSON.stringify(data[i]) + ' <- ';
+   }
+   return output + JSON.stringify(data[tail]) + ' }';
+  };
 
-    this.dequeue = function () {
-      if (tail < head) return;
-      const value = data[head];
-      delete data[head];
-      head++;
-      return value;
-    };
-
-    this.print = function () {
-      if (tail < head) return 'Queue { <empty> }';
-      let output = 'Queue { ';
-      for (let i = head; i < tail; i++) {
-        output += JSON.stringify(data[i]) + ' <- ';
-      }
-      return output + JSON.stringify(data[tail]) + ' }';
-    };
-
-    for (let i = 0; i < values.length; i++) {
-      this.enqueue(values[i]);
-    }
-
-    Object.freeze(this);
-
+  for (let i = 0; i < values.length; i++) {
+   this.enqueue(values[i]);
   }
 
+  Object.freeze(this);
+ }
 }

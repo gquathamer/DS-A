@@ -6,21 +6,20 @@
 // returning the count of sub strings in that larger string
 
 function subString(string, subString) {
+ let count = 0;
 
-    let count = 0
+ for (let i = 0; i < string.length; i++) {
+  for (let j = 0; j < subString.length; j++) {
+   if (string[i + j] !== subString[j]) {
+    break;
+   }
+   if (j === subString.length - 1) {
+    count++;
+   }
+  }
+ }
 
-    for (let i = 0; i < string.length; i++) {
-        for (let j = 0; j < subString.length; j++) {
-            if (string[i + j] !== subString[j]) {
-                break;
-            }
-            if (j === subString.length - 1) {
-                count++;
-            }
-        }
-    }
-
-    return count;
+ return count;
 }
 
 subString('lorie loled', 'lol');
