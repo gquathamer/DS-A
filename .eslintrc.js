@@ -1,4 +1,4 @@
-{
+module.exports = {
     "env": {
         "browser": true,
         "es2021": true,
@@ -12,6 +12,14 @@
         "sourceType": "module"
     },
     "rules": {
-        'no-console': 'on',
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                "warn",
+                "error"
+                ]
+            }
+        ]
     }
 }
