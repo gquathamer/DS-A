@@ -1,4 +1,4 @@
-const mergeFunction = (arr1, arr2) => {
+export default function mergeFunction(arr1, arr2) {
  // create an emtpy array, find smallest values in each input array
  // while there are still values we haven't looked at
  // if the value in the first arr is smaller, push into results array
@@ -26,8 +26,4 @@ const mergeFunction = (arr1, arr2) => {
   j++;
  }
  return results;
-};
-
-module.exports = {
- mergeFunction,
-};
+}
