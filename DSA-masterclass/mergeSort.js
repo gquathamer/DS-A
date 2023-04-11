@@ -1,4 +1,4 @@
-const mergeFunction = require('./mergeSortMergeFunction').mergeFunction;
+import mergeFunction from './mergeSortMergeFunction.js';
 
 const mergeSort = arr => {
  // break up the array into halves until you have arrays that are empty or have one element
