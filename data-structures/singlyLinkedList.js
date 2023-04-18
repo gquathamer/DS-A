@@ -122,17 +122,9 @@ class SinglyLinkedList {
   // use get to find the node at index - 1
   // set the next property of previous node to be a new node
   // connect new node to old next node
-  if (idx < 0 || idx > this.length) {
-   return false;
-  }
-  if (idx === this.length) {
-   this.push(value);
-   return true;
-  }
-  if (idx === 0) {
-   this.unShift(value);
-   return true;
-  }
+  if (idx < 0 || idx > this.length) return false;
+  if (idx === this.length) return !!this.push(value);
+  if (idx === 0) return !!this.unShift(value);
   const newNode = new Node(value);
   const currentNode = this.get(idx - 1);
   newNode.next = currentNode.next;
