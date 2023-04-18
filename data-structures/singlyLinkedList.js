@@ -91,11 +91,60 @@ class SinglyLinkedList {
   this.length++;
   return this;
  }
+
+ get(idx) {
+  // initialize a count variable
+  // initialize a currentNode variable
+  // while while count < idx set currentNode to currentNode.next
+  if (idx < 0 || idx >= this.length) return null;
+  let count = 0;
+  let currentNode = this.head;
+  while (count < idx) {
+   currentNode = currentNode.next;
+   count++;
+  }
+  return currentNode;
+ }
+
+ set(idx, value) {
+  const currentNode = this.get(idx);
+  if (currentNode) {
+   currentNode.val = value;
+   return true;
+  }
+  return false;
+ }
+
+ insert(idx, value) {
+  // if idx < 0 || idx > this.length return false
+  // if the index is same length as end, use push!
+  // if index is 0, unshift
+  // use get to find the node at index - 1
+  // set the next property of previous node to be a new node
+  // connect new node to old next node
+  if (idx < 0 || idx > this.length) {
+   return false;
+  }
+  if (idx === this.length) {
+   this.push(value);
+   return true;
+  }
+  if (idx === 0) {
+   this.unShift(value);
+   return true;
+  }
+  const newNode = new Node(value);
+  const currentNode = this.get(idx - 1);
+  newNode.next = currentNode.next;
+  currentNode.next = newNode;
+  this.length++;
+  return true;
+ }
 }
 
 const myList = new SinglyLinkedList();
 myList.push(1);
 myList.push(2);
 myList.push(3);
-console.log(myList.unShift(4));
-console.log(myList);
+myList.push(4);
+console.log(myList.insert(7, 500));
