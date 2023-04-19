@@ -132,6 +132,50 @@ class SinglyLinkedList {
   this.length++;
   return true;
  }
+
+ remove(idx) {
+  if (idx < 0 || idx > this.length) return false;
+  if (idx === this.length - 1) return !!this.pop();
+  if (idx === 0) return !!this.shift();
+  const previousNode = this.get(idx - 1);
+  const removed = previousNode.next;
+  previousNode.next = removed.next;
+  this.length--;
+  return previousNode;
+ }
+
+ reverse() {
+  // set the tail to be the head
+  // how to get the node behind previous, use get?
+  // get the node behind prevTail
+  // set new head .next to be node behind
+  // move forward so node behind is now subject
+  // repeat until you reach the head
+  // set the old head to new tail
+  const newHead = this.tail;
+  const newTail = this.head;
+  let position = this.length - 1;
+  while (position > 0) {
+   const reversedNode = this.get(position);
+   const reversedNodeNext = this.get(position - 1);
+   reversedNode.next = reversedNodeNext;
+   position--;
+  }
+  this.head = newHead;
+  this.tail = newTail;
+  this.tail.next = null;
+  return this;
+ }
+
+ print() {
+  const arr = [];
+  let current = this.head;
+  while (current) {
+   arr.push(current.val);
+   current = current.next;
+  }
+  console.log(arr);
+ }
 }
 
 const myList = new SinglyLinkedList();
@@ -139,4 +183,4 @@ myList.push(1);
 myList.push(2);
 myList.push(3);
 myList.push(4);
-console.log(myList.insert(7, 500));
+console.log(myList.print());
