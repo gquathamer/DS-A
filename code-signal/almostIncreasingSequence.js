@@ -1,28 +1,30 @@
 function solution(sequence) {
- // input is an array of integers
- // output is a boolean
- // create a counter variable that will hold the position being omitted from the array
- // inside of a while loop, create a for loop
- // if counter is the same as i set i back one or i and j forward one
- // [1, 3, 2, 1]
- //        _
- //      _     _
- // loop through the array and return false if elem 1 is > elem 2
- let counter = 0;
- while (counter < sequence.length) {
-  let slicedElement = sequence.splice(counter, 1);
-  for (let i = 0, j = i + 1; i < sequence.length - 1; i++, j++) {
-   if (sequence[i] >= sequence[j]) {
-    break;
-   }
-   if (j === sequence.length - 1) {
-    return true;
+ if (sequence.length == 2) return true;
+
+ var error = 0;
+
+ for (var i = 0; i < sequence.length - 1; i++) {
+  // if current value is greater than next value
+  if (sequence[i] >= sequence[i + 1]) {
+   // Test whether stepping back or forwards can bridge the hump or pothole
+   var noStepBack = sequence[i - 1] && sequence[i - 1] >= sequence[i + 1];
+   var noStepFoward = sequence[i + 2] && sequence[i] >= sequence[i + 2];
+   // We only test for bridge gaps when i > 0
+   if (i > 0 && noStepBack && noStepFoward) {
+    // Cannot step back over gap forwards or backwards
+    // Counts as two errors ONLY WHEN BOTH PRESENT
+    error += 2;
+   } else {
+    // Typical error
+    error++;
    }
   }
-  sequence.splice(counter, 0, slicedElement[0]);
-  counter++;
+
+  // Early dropout cause if you ever get more than one error, then its game over anyway
+  if (error > 1) return false;
  }
- return false;
+
+ return true;
 }
 
 solution([1, 2, 1, 2]);
